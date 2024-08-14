@@ -969,17 +969,17 @@ int display_files(int socket, const char *dir_path)
   char file_paths[15360] = "";
   traverse_directory(dir_path_full, dir_path_full, file_paths);
 
-  char txt_file_paths[5120] = "";
-  display_files_from_server(stext_server_socket, dir_path, txt_file_paths);
-
   char pdf_file_paths[5120] = "";
   display_files_from_server(spdf_server_socket, dir_path, pdf_file_paths);
 
-  // append txt_file_paths to file_paths
-  strcat(file_paths, txt_file_paths);
-
   // append pdf_file_paths to file_paths
   strcat(file_paths, pdf_file_paths);
+
+  char txt_file_paths[5120] = "";
+  display_files_from_server(stext_server_socket, dir_path, txt_file_paths);
+
+  // append txt_file_paths to file_paths
+  strcat(file_paths, txt_file_paths);
 
   // get file size
   int msg_size = strlen(file_paths);
